@@ -16,38 +16,28 @@ Assuming you have the credential to properly ssh into the server
 ## Moving/Copying the application folder
 After you unzip the folder to a location of choice and the copy the folder to var/www/ folder. By default, Nginx  is configured to serve documents out of a directory at /var/www/html.(Digital Ocean).
 
-## Creating server block files ie 
+## Setting up the environment  for a laravel application
+Here is a list of things you need to do 
+- create a  .env file and specify the database credentials  of choice you can look at the .env.example file as a guide.
+- Run php artisan key:generate to generate key
+-  Run composer update 
+-  Run npm install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premi
+## Setting up the seed data to be used
+Since you installed mysql on the machine,you need to seed data into the database specified above
+-  Run php artisan migrate:fresh --seed;
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Setting up a Vitual Host on nginx
 
-## Contributing
+Laravel provide a template to set up a  [Virtual Host ](https://laravel.com/docs/11.x/deployment#nginx) .Assuming a domain exists for the application and designated port.A vitual host is set up in /etc/nginx/sites-available/ in the names of  the domain for ease of identification.All virtual hosts need to enabled this can be done by sudo ln -s /etc/nginx/sites-available/domain /etc/nginx/sites-enabled/ which basically creates a link between /etc/nginx/sites-enabled/ and /etc/nginx/sites-available/domain.Ensure no issue with synax by running sudo nginx -t .Restart the nginx server after making this changes by sudo systemctl restart nginx
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## Dealing with vite
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Since we are working with vite and we had properly installed npm packages before.Run npm run build so that vite is built in the production environment.
 
-## Security Vulnerabilities
+## Optimizing and cache
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Make sure APP_DEBUG is switched to false in the .env file.Run php artisan optimize to remove cache
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
