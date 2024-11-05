@@ -8,7 +8,7 @@ use App\Models\Project;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Activity>
  */
-class ActivityFactory extends Factory
+class TaskFactory extends Factory
 {
     /**
      * Define the model's default state.
